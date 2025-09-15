@@ -1,0 +1,10 @@
+services:
+  php:
+    restart: always
+    image: softavis/php:8.4-cli
+    working_dir: /var/www/html
+    command: symfony server:start --no-tls --allow-http --allow-all-ip
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www/html

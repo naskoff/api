@@ -1,0 +1,44 @@
+services:
+  php:
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:s3cr3t@db:5432/${DB_NAME:-app}?serverVersion=17.6}
+      MAILER_DSN: ${MAILER_DSN:-smtp://mail:1025}
+      REDIS_DSN: ${REDIS_DSN:-redis://cache:6379}
+  db:
+    restart: always
+    image: postgres:17.6-alpine
+    shm_size: 256mb
+    ports:
+      - ${DB_PORT:-5432}:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME:-app}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-s3cr3t}
+  mail:
+    restart: always
+    image: mailhog/mailhog:v1.0.1
+    ports:
+      - ${MAIL_PORT:-8025}:8025
+    volumes:
+      - mail-data:/maildir
+  cache:
+    restart: always
+    image: redis:7.4-alpine
+    ports:
+      - ${CACHE_PORT:-6379}:6379
+    volumes:
+      - cache-data:/data
+  cache-ui:
+    restart: always
+    image: rediscommander/redis-commander:latest
+    ports:
+      - ${CACHE_UI_PORT:-8081}:8081
+    environment:
+      REDIS_HOSTS: local:cache:6379
+
+volumes:
+  db-data:
+  mail-data:
+  cache-data:
