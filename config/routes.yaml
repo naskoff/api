@@ -1,5 +1,11 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+api_controllers:
     type: attribute
+    prefix: /api/v1/
+    name_prefix: api.
+    resource:
+        path: ../src/Controller/Api/
+        namespace: App\Controller\Api
+
+controllers:
+    type: attribute
+    resource: ../src/Controller/HomeController.php

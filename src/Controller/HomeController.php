@@ -6,12 +6,13 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
-class HomepageController extends AbstractController
+class HomeController extends AbstractController
 {
     #[Route('/')]
-    public function index(): Response
+    public function index(UserPasswordHasherInterface $userPasswordHasher): Response
     {
         return $this->json(['message' => 'Hello World!']);
     }
