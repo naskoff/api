@@ -9,3 +9,9 @@ api_controllers:
 controllers:
     type: attribute
     resource: ../src/Controller/HomeController.php
+
+api_login_check:
+    path: /api/login_check
+
+api_refresh_token:
+    path: /api/token/refresh

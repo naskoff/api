@@ -1,9 +1,9 @@
 services:
   php:
     environment:
-      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:s3cr3t@db:5432/${DB_NAME:-app}?serverVersion=17.6}
-      MAILER_DSN: ${MAILER_DSN:-smtp://mail:1025}
       REDIS_DSN: ${REDIS_DSN:-redis://cache:6379}
+      MAILER_DSN: ${MAILER_DSN:-smtp://mail:1025}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:s3cr3t@db:5432/${DB_NAME:-app}?serverVersion=17.6}
   db:
     restart: always
     image: postgres:17.6-alpine
